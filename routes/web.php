@@ -9,8 +9,8 @@ use App\Http\Controllers\homeController;
 Route::get('/',[homeController::class,'index'])->name('home');
 
 Route::get('/products',[productController::class,'index'])->name('product.list');
-Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 
 

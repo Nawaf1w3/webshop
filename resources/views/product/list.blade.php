@@ -39,10 +39,8 @@
 					<div class="product-filters">
 						<ul>
 							<li class="active" data-filter="*">All</li>
-							@foreach($products as $product)
-								@if($product->category)
-									<li class="" data-filter=""> {{ $product->category->name }}</p>
-								@endif
+							@foreach($categories as $categorie)
+									<li class="" data-filter=""> {{ $categorie->name }}</p>
 							@endforeach
 						</ul>
 					</div>
