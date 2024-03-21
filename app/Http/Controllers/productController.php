@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Categorie;
+use App\Models\Size;
 use Illuminate\Support\Str;
 
 
@@ -27,7 +28,8 @@ class productController extends Controller
     public function create()
     {
         $categories = Categorie::get();
-        return view('product.create', compact('categories'));
+        $sizes = Size::get();
+        return view('product.create', compact('categories','sizes'));
     }
 
     /**
@@ -46,6 +48,8 @@ class productController extends Controller
             // 'DisplayImage' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             // 'ProductImage' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             // 'ProductImage2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'sizes.*' => 'required|exists:sizes,id', // Validate that sizes are selected and exist
+            'quantities.*' => 'nullable|integer|min:0', // Validate quantity input for each size
         ]);
     
         // Create new product
@@ -55,8 +59,14 @@ class productController extends Controller
         $product->price = $validatedData['price'];
         $product->category_id = $validatedData['categorie'];
         $product->save();
-    
-        
+ 
+
+        foreach ($validatedData['quantities'] as $sizeId => $quantity) {
+            // Attach size to the product with the provided quantity
+            $product->sizes()->attach($sizeId, ['quantity_available' => $quantity]);
+        }
+
+
         // Generate unique filename prefix using product ID and other relevant information
         $filenamePrefix = uniqid() . '_' . Str::slug($validatedData['productName']);
 
@@ -91,13 +101,14 @@ class productController extends Controller
      */
     public function show($id)
     {
-        // Retrieve the product details by ID
-        
+
         $product = Product::findOrFail($id);
+        $sizes = $product->sizes()->withPivot('quantity_available')->get();
+        // dd($sizes);
         $currentProductId = $id;
         $products = Product::where('id', '!=', $id)->get();
         
-        return view('product.show', compact('product','products','currentProductId'));
+        return view('product.show', compact('product', 'sizes', 'products', 'currentProductId'));
     }
 
     /**

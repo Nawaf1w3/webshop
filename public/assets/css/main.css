@@ -21,6 +21,96 @@ html {
   margin-left: 0.5rem !important;
   margin-top: 3rem !important;
 }
+.product-sizes {
+  display: flex;
+  justify-content: space-between; /* Adjust spacing between sizes */
+}
+
+.product-size {
+  flex-basis: 9%; /* Adjust size width */
+  position: relative;
+  width: 30px; /* Adjust the size of the square */
+  height: 30px; /* Adjust the size of the square */
+  background-color: #f0f0f0; /* Change color as needed */
+  cursor: pointer;
+  font-display: flex;
+  margin: 5px;
+}
+
+.product-size input[type="radio"] {
+  display: none; /* Hide the default radio button */
+
+}
+.product-size-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000; /* Change color as needed */
+  cursor: pointer;
+}
+
+/* Style when selected */
+.product-size input[type="radio"]:checked + .product-size-label {
+  background-color: #F28123; /* Change background color when selected */
+  color: #fff; /* Change text color when selected */
+}
+.product-size input[type="radio"]:disabled + .product-size-label {
+  background-color: #f0f0f0; /* Change background color for disabled inputs */
+  color: #bababa; /* Change text color for disabled inputs */
+  cursor: not-allowed; /* Change cursor style for disabled inputs */
+}
+.product-size input[type="radio"]:disabled + .product-size-label::before {
+  content: ''; /* Add content to the pseudo-element */
+  position: absolute; /* Position the pseudo-element */
+  top: 52%; /* Position the pseudo-element vertically */
+  left: 50%; /* Position the pseudo-element at the center of the label */
+  transform: translateX(-55%); /* Center the line horizontally */
+  width: 45%; /* Set the width to cover half of the label */
+  height: 1px; /* Set the height of the line */
+  background-color: #999; /* Change the color of the line */
+}
+
+.breadcrumb {
+  font-size: 14px;
+  color: #333;
+  background-color: rgb(255, 255, 255);
+}
+
+.breadcrumb a {
+  color: #414141;
+  
+}
+.breadcrumb a:hover {
+  text-decoration: underline !important;
+}
+
+.separator {
+  margin: 0 5px;
+  color: #333;
+}
+
+.separator::after {
+  content: attr(data-content);
+}
+
+.separator:last-child {
+  display: none;
+}
+.bullet{
+  color: rgb(34, 207, 34);
+  margin-right: 7px;
+}
+.container {
+  margin:  auto !important; /* Center the container horizontally */
+  max-width: 1200px !important; /* Set maximum width */
+  padding: 0 20px !important; /* Add padding to the left and right */
+  position: relative !important; /* Ensure positioning context */
+}
 
 .product-lists .single-product-item {
   height: 500px; /* Set a fixed height for each product item */

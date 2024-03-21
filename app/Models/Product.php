@@ -23,4 +23,11 @@ class Product extends Model
     {
         return $this->hasMany(Image::class);
     }
+
+    public function sizes()
+    {
+        return $this->belongsToMany(Size::class, 'product_sizes')
+                    ->withPivot('quantity_available')
+                    ->withTimestamps();
+    }
 }

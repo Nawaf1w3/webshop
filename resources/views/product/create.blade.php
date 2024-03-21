@@ -51,7 +51,7 @@
                                             <input class="form-control" id="price" name="price" placeholder="Enter product price">
                                         </div>
                                         <div>
-                                            <label for="categorie">categorie</label>
+                                            <label for="categorie">Categorie</label>
                                             <select class="custom-select" id="categorie" name="categorie">
                                                 <option selected>Choose...</option>
                                                 @foreach ($categories as $item)
@@ -60,17 +60,29 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="DisplayImage">product display image</label>
+                                            <label for="DisplayImage">Product display image</label>
                                             <input type="file" class="form-control-file" id="DisplayImage" name="DisplayImage">
                                         </div>
                                         <div class="form-group">
-                                            <label for="ProductImage">product images</label>
+                                            <label for="ProductImage">Product images</label>
                                             <input type="file" class="form-control-file" id="ProductImages" name="ProductImage">
                                         </div>
                                         <div class="form-group">
-                                            <label for="ProductImage2">product images</label>
+                                            <label for="ProductImage2">Product images</label>
                                             <input type="file" class="form-control-file" id="ProductImage2" name="ProductImage2">
                                         </div>
+                                        <!-- Sizes and quantities -->
+                                        <div class="form-group">
+                                            <label for="sizes">Sizes:</label>
+                                            @foreach ($sizes as $size)
+                                            <div class="form-group">
+                                                <label for="size_{{ $size->id }}">{{ $size->name }}</label>
+                                                <input class="form-control" type="number" name="quantities[{{ $size->id }}]" value="0" min="0">
+                                            </div>
+                                        @endforeach
+                                        </div>
+                                        <!-- End of sizes and quantities -->
+                                    
                                         <button type="submit" class="btn btn-primary btn-block">Add product</button>
                                     </form>
                                 </div>

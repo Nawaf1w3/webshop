@@ -5,78 +5,7 @@
 @section('content')
 
 <style>
-.product-sizes {
-    display: flex;
-    justify-content: space-between; /* Adjust spacing between sizes */
-}
 
-.product-size {
-    flex-basis: 20%; /* Adjust size width */
-    position: relative;
-    width: 30px; /* Adjust the size of the square */
-    height: 30px; /* Adjust the size of the square */
-    background-color: #f0f0f0; /* Change color as needed */
-    cursor: pointer;
-}
-
-.product-size input[type="radio"] {
-    display: none; /* Hide the default radio button */
-}
-
-.product-size-label {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #000; /* Change color as needed */
-    cursor: pointer;
-}
-
-/* Style when selected */
-.product-size input[type="radio"]:checked + .product-size-label {
-    background-color: #F28123; /* Change background color when selected */
-    color: #fff; /* Change text color when selected */
-}
-.breadcrumb {
-    font-size: 14px;
-    color: #333;
-    background-color: rgb(255, 255, 255);
-}
-
-.breadcrumb a {
-    color: #414141;
-    
-}
-.breadcrumb a:hover {
-    text-decoration: underline !important;
-}
-
-.separator {
-    margin: 0 5px;
-    color: #333;
-}
-
-.separator::after {
-    content: attr(data-content);
-}
-
-.separator:last-child {
-    display: none;
-}
-.bullet{
-    color: rgb(34, 207, 34);
-    margin-right: 7px;
-}
-.container {
-    margin:  auto !important; /* Center the container horizontally */
-    max-width: 1200px !important; /* Set maximum width */
-    padding: 0 20px !important; /* Add padding to the left and right */
-    position: relative !important; /* Ensure positioning context */
-}
 
 
 
@@ -144,41 +73,29 @@
                             <img class="" src="assets/img/products/white-hood.jpg"style="width: 100px; height: 150px;">
                             <p class="pt-1" style="color:#606060; font-size:12px;"><span></span>code: OTP241019-102</p>
                         </div>
+
                         <!--section line -->
                         <div class="border-top mt-3 mb-3"></div>
                         <!--end section line -->
 
-                        <div class="select_size-div">
-                            <div class="select-size-text">
-                                <p style="color:#606060; font-size:12px;"><span></span>select size</p>
+                            <div class="select_size-div">
+                                <div class="select-size-text">
+                                    <p style="color:#606060; font-size:12px;"><span></span>Select Size</p>
+                                </div>
                             </div>
-                            <div class="product-sizes">
+                            <div class="row">
+                                @foreach ($sizes as $size)
+                                    <div class="product-size">
+                                        <input type="radio" id="size_{{ $size->id }}" class="size-radio select-size options-select" name="product-size" value="{{ $size->id }}" {{ $size->pivot->quantity_available == 0 ? 'disabled' : '' }}>
+                                        <label class="product-size-label" for="size_{{ $size->id }}">{{ $size->name }}</label>
+                                    </div>
+                                @endforeach                         
+                            </div>
 
-                                <div class="product-size">
-                                    <input type="radio" id="size_S" class="size-radio select-size options-select" name="product-size" value="S">
-                                    <label class="product-size-label" for="size_S">S</label>
-                                </div>
-                                <div class="product-size">
-                                    <input type="radio" id="size_XS" class="size-radio select-size options-select" name="product-size" value="XS">
-                                    <label class="product-size-label" for="size_XS">XS</label>
-                                </div>
-                                <div class="product-size">
-                                    <input type="radio" id="size_L" class="size-radio select-size options-select" name="product-size" value="L">
-                                    <label class="product-size-label" for="size_L">L</label>
-                                </div>
-                                <div class="product-size">
-                                    <input type="radio" id="size_XL" class="size-radio select-size options-select" name="product-size" value="XL">
-                                    <label class="product-size-label" for="size_XL">XL</label>
-                                </div>
-                                <div class="product-size">
-                                    <input type="radio" id="size_XXL" class="size-radio select-size options-select" name="product-size" value="XXL">
-                                    <label class="product-size-label" for="size_XXL">XXL</label>
-                                </div>
-                            </div>
-                        </div>
                         <!--section line -->
                         <div class="border-top mt-3 mb-3"></div>
                          <!--end section line -->
+                         
                         <div class="single-product-form">
                             <div>
                                 <p style="color:green; font-size:11px;"></span > op vooraad</p>
