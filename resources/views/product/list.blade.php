@@ -4,6 +4,10 @@
 
 @section('content')
 
+
+<style>
+
+</style>
     
     
     <!-- breadcrumb-section -->
@@ -38,29 +42,24 @@
 				<div class="col-md-12">
 					<div class="product-filters">
 						<ul>
-							<li class="active" data-filter="*">All</li>
-							@foreach($categories as $categorie)
-									<li class="" data-filter=""> {{ $categorie->name }}</p>
+							@foreach($categories as $category)
+								<li class="" data-filter="{{ $category->id }}" onclick="filterProducts({{ $category->id }})">{{ $category->name }}</li>
 							@endforeach
 						</ul>
 					</div>
-				</div>
-			</div>
-			<div class="product-section ">
-				<div class="container">
+					
 					<div class="row product-lists" style="position: relative;">
 						@foreach($products as $product)
-							<div class="col-lg-4 col-md-6 text-center strawberry">
+							<div class="col-lg-4 col-md-6 text-center strawberry product-item" data-category="{{ $product->category_id }}">
 								<div class="single-product-item">
 									<div class="product-image">
 										<a href="/products/{{$product->id}}">
 											@if ($product->images->isNotEmpty())
-       											<img class="product-image"src="{{ asset($product->images->first()->path) }}" alt="Product Image">
+												<img class="product-image"src="{{ asset($product->images->first()->path) }}" alt="Product Image">
 											@else
 												<p>No image available</p>
 											@endif
 										</a>
-										
 									</div>
 									<h3>{{ $product->name }}</h3>
 									<p>€ {{ $product->price }} </p>
@@ -118,3 +117,4 @@
 
 
     @endsection
+

@@ -7,6 +7,50 @@
 <style>
 
 
+.product-scroll-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-left: 50px;
+}
+
+.product-scroll-wrapper {
+    display: inline-flex;
+}
+
+.product-scroll-item {
+    flex: 0 0 auto;
+    margin-right: 15px;
+    text-align: center;
+}
+
+.product-scroll-image {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.product-scroll-name {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.product-scroll-price {
+    font-size: 12px;
+    color: #888;
+    margin-top: 3px;
+}
+
+
+.product-scroll-item a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Hide scrollbar in WebKit browsers */
+.product-scroll-container::-webkit-scrollbar {
+    
+}
+
 
 
 
@@ -41,32 +85,40 @@
                 <span class="separator">›</span>
                 <a href="/kleding/t-shirts-tops/oversized">Oversized</a>
             </div>
+
+      
             <!--end breacamp -->
-            <div class="row" style="width: 85%; height: 85%;">
-                <div class="col-md-5">
-                    <div class="single-product-img">
-                        <img src="{{ asset($product->images->first()->path) }}" alt="Product Image">
-                        <div class="additional-product-images">
-                            <div class="row m-10">
-                                @foreach($product->images->slice(1) as $image)
-                                    <div class="p-2">
-                                        <img src="{{ asset($image->path) }}" alt="Additional Product Image" class="img-thumbnail" style="width: 70px; height: 100px;">
-                                    </div>
-                                @endforeach
+            <div class="row">
+                    <div class="col-md-5">
+                        <div class="single-product-img-show">
+                            <img src="{{ asset($product->images->first()->path) }}" alt="Product Image" class="main-product-image">
+                            <div class="additional-product-images">
+                                <div class="row m-10">
+                                    @foreach($product->images as $index => $image)
+                                        <div class="p-2 additional-image" data-index="{{ $index }}">
+                                            <img src="{{ asset($image->path) }}" alt="Additional Product Image" class="img-thumbnail" style="width: 70px; height: 100px;">
+                                        </div>
+                                    @endforeach
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
+                
 
                 <div class="col-md-7">
                     <div class="single-product-content">
 
+
                         <div class="row">
                             <h3>{{ $product->name }}</h3>
                                
-                            <h3 class="pl-5"><strong>€ {{ $product->price }}</strong></h3>   
+                            <h3 class="pl-5">€ {{ $product->price }}</h3>   
                         </div>
-                        
+
+                            <!--section line -->
+                            <div class="border-top mt-3 mb-3"></div>
+                            <!--end section line -->
 
                         <div class="select_color">
                             <p class="" style="color:#606060; font-size:12px;"><span></span>color</p>
@@ -120,50 +172,46 @@
                         <div class="border-top mt-3 mb-3"></div>
                         <!--end section line -->
 
-                        <h4>Share:</h4>
-
-                        <ul class="product-share">
-                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
-                            <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-                        </ul>
+                        
+                        <div class="m-auto">
+                            <h4>Share:</h4>
+                            <ul class="product-share">
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="border-top mt-3 mb-3"></div>
         </div>
     </div>
 
-   
+    <!--section line -->
+    <div class="border-top pt-3 pb-3"></div>
+    <!--end section line -->
 
-	<!-- more products -->
-    <div class="product-section">
-        <div class="container">
-            <div class="row product-lists" style="position: relative;">
+        <div class="pl-5"><h3>Related</h3></div>
+        <!-- more products -->
+        <div class="product-scroll-container">
+            <div class="product-scroll-wrapper">
                 @foreach($products as $product)
-                    @if($product->id !== $currentProductId) <!-- Exclude the current product -->
-                        <div class="col-lg-4 col-md-6 text-center strawberry">
-                            <div class="single-product-item">
-                                <div class="product-image">
-                                    <a href="/products/{{$product->id}}">
-                                        @if ($product->images->isNotEmpty())
-                                               <img class="product-image"src="{{ asset($product->images->first()->path) }}" alt="Product Image">
-                                        @else
-                                            <p>No image available</p>
-                                        @endif
-                                    </a>
-                                </div>
-                                <h3>{{ $product->name }}</h3>
-                                <p>€ {{ $product->price }} </p>
-                            </div>
+                    @if($product->id !== $currentProductId)
+                        <div class="product-scroll-item">
+                            <a href="/products/{{ $product->id }}">
+                                <img src="{{ asset($product->images->first()->path) }}" alt="Product Image" class="product-scroll-image">
+                                <h3 class="product-scroll-name">{{ $product->name }}</h3>
+                                <h3 class="product-scroll-price">€ {{ $product->price }}</h3>
+                            </a>
                         </div>
                     @endif
                 @endforeach
             </div>
         </div>
-    </div>
-	<!-- end more products -->
+        
+
+<!-- end more products -->
 
 	<!-- logo carousel -->
 	<div class="logo-carousel-section">
@@ -191,10 +239,20 @@
 			</div>
 		</div>
 	</div>
-@endsection
+
+    @endsection
 
 
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.additional-image').click(function() {
+            var imagePath = $(this).find('img').attr('src');
+            $('.main-product-image').attr('src', imagePath);
+        });
+    });
+</script>
 
 
 
