@@ -13,5 +13,6 @@ Route::get('/products/create', [ProductController::class, 'create'])->name('prod
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 
+Route::get('/filter-products', [ProductController::class, 'filterProducts'])->name('products.store');
 
 

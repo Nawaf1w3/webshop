@@ -85,18 +85,36 @@
          });
         }
 
-        // projects filters isotop
-        $(".product-filters li").on('click', function () {
-            
-            $(".product-filters li").removeClass("active");
-            $(this).addClass("active");
-
-            var selector = $(this).attr('data-filter');
-
-            $(".product-lists").isotope({
-                filter: selector,
+        document.querySelectorAll('.category-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove 'active' class from all category buttons
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+    
+                // Add 'active' class to the clicked category button
+                this.classList.add('active');
+    
+                var selector = this.getAttribute('data-category');
+    
+                // Handle 'All' button separately
+                if (selector === '0') {
+                    // Show all products
+                    document.querySelectorAll('.product-item').forEach(item => {
+                        item.style.display = 'block';
+                    });
+                } else {
+                    // Hide all products
+                    document.querySelectorAll('.product-item').forEach(item => {
+                        item.style.display = 'none';
+                    });
+    
+                    // Show products with matching category
+                    document.querySelectorAll(`.product-item[data-category="${selector}"]`).forEach(item => {
+                        item.style.display = 'block';
+                    });
+                }
             });
-            
         });
         
         // isotop inner

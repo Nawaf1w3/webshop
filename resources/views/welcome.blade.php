@@ -12,7 +12,7 @@
 								<p class="subtitle">Fresh & styley</p>
 								<h1>monthly edtions </h1>
 								<div class="hero-btns">
-									<a href="shop.html" class="boxed-btn">Fruit Collection</a>
+									<a href="shop.html" class="boxed-btn">see Collection</a>
 									<a href="contact.html" class="bordered-btn">Contact Us</a>
 								</div>
 							</div>

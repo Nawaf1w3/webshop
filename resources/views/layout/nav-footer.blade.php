@@ -31,6 +31,7 @@
 	<!-- responsive -->
 	<link rel="stylesheet" href="assets/css/responsive.css">
 	<!-- tailwinds links -->
+	@vite(['resources/css/app.css','resources/js/app.js'])
 	
 </head>
 <body>

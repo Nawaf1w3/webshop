@@ -16,9 +16,19 @@ class productController extends Controller
      */
     public function index()
     {
-        $products = Product::with(['images', 'category'])->get();
-       $categories = Categorie::get();
-        return view('product.list', compact('products','categories'));
+        $products = Product::all();
+        $categories = Categorie::all(); // Assuming you have a Category model
+
+        return view('product.list', compact('products', 'categories'));
+    }
+
+    public function filter(Request $request)
+    {
+        $categoryId = $request->input('category_id');
+
+        $products = ($categoryId == 0) ? Product::all() : Product::where('category_id', $categoryId)->get();
+        
+        return response()->json($products);
     }
     
 
@@ -134,4 +144,7 @@ class productController extends Controller
     {
         //
     }
+
+
+
 }
