@@ -13,6 +13,9 @@ Route::get('/products/create', [ProductController::class, 'create'])->name('prod
 Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 
-Route::get('/filter-products', [ProductController::class, 'filterProducts'])->name('products.store');
+Route::post('/filter-products', [ProductController::class, 'filter'])->name('products.filter');
 
 
+
+Route::get('/categories/create', [ProductController::class, 'createCategory'])->name('categories.create');
+Route::post('/categories', [ProductController::class, 'storeCategory'])->name('categories.store');

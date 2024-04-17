@@ -122,7 +122,16 @@
 
                         <div class="select_color">
                             <p class="" style="color:#606060; font-size:12px;"><span></span>color</p>
-                            <img class="" src="assets/img/products/white-hood.jpg"style="width: 100px; height: 150px;">
+                            @if ($variants->isNotEmpty())
+                                <h3>Variants</h3>
+                                <ul>
+                                    @foreach ($variants as $variant)
+                                        <a href="/products/{{ $variant->id }}">
+                                            <img src="{{ asset($variant->images->first()->path) }}" alt="Product Image" class="main-product-image" style="width: 100px; height: 150px;">
+                                        </a>
+                                    @endforeach
+                                </ul>
+                            @endif
                             <p class="pt-1" style="color:#606060; font-size:12px;"><span></span>code: OTP241019-102</p>
                         </div>
 

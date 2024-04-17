@@ -45,13 +45,21 @@
 					<div class="breadcrumb-text">
 						<h1>Shop</h1>
 					</div>
-					<div class="py-4 px-4">
-							<a  class="px-3 py-2 border-2 border-orange-400 rounded-full  text-white hover:bg-orange-400 content-center" href="/products/create">add product.. +</a>
+					<div class="flex justify-center"> <!-- Use justify-center to align items in the center -->
+						<div class="py-4 px-4">
+							<a class="px-3 py-2 border-2 border-orange-400 rounded-full text-white hover:bg-orange-400" href="/products/create">Add Product.. +</a>
+						</div>
+						<div class="py-4 px-4">
+							<a class="px-3 py-2 border-2 border-orange-400 rounded-full text-white hover:bg-orange-400" href="/categories/create">Add category.. +</a>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+
+	
 	<!-- end breadcrumb section -->
 
 	<!-- products -->

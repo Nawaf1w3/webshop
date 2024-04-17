@@ -30,4 +30,8 @@ class Product extends Model
                     ->withPivot('quantity_available')
                     ->withTimestamps();
     }
+    public function variants()
+    {
+        return $this->hasMany(Product::class, 'parent_id');
+    }
 }

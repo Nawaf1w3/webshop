@@ -72,16 +72,27 @@
                                             <input type="file" class="form-control-file" id="ProductImage2" name="ProductImage2">
                                         </div>
                                         <!-- Sizes and quantities -->
-                                        <div class="form-group">
+                                        <div class=" flex form-group">
                                             <label for="sizes">Sizes:</label>
                                             @foreach ($sizes as $size)
-                                            <div class="form-group">
+                                            <div class="py-4 px-4 form-group">
                                                 <label for="size_{{ $size->id }}">{{ $size->name }}</label>
                                                 <input class="form-control" type="number" name="quantities[{{ $size->id }}]" value="0" min="0">
                                             </div>
                                         @endforeach
                                         </div>
                                         <!-- End of sizes and quantities -->
+
+                                        <!-- parent products -->
+                                        <div class="form-group">
+                                            <label for="parent_product">Parent Product (if variant)</label>
+                                            <select name="parent_product" class="form-control">
+                                                <option value="">None</option>
+                                                @foreach ($products as $product)
+                                                    <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     
                                         <button type="submit" class="btn btn-primary btn-block">Add product</button>
                                     </form>
