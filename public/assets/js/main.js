@@ -92,28 +92,28 @@
                     btn.classList.remove('active');
                 });
     
-                // Add 'active' class to the clicked category button
+        //         // Add 'active' class to the clicked category button
                 this.classList.add('active');
     
-                var selector = this.getAttribute('data-category');
+        //         var selector = this.getAttribute('data-category');
     
-                // Handle 'All' button separately
-                if (selector === '0') {
-                    // Show all products
-                    document.querySelectorAll('.product-item').forEach(item => {
-                        item.style.display = 'block';
-                    });
-                } else {
-                    // Hide all products
-                    document.querySelectorAll('.product-item').forEach(item => {
-                        item.style.display = 'none';
-                    });
+        //         // Handle 'All' button separately
+        //         if (selector === '0') {
+        //             // Show all products
+        //             document.querySelectorAll('.product-item').forEach(item => {
+        //                 item.style.display = 'block';
+        //             });
+        //         } else {
+        //             // Hide all products
+        //             document.querySelectorAll('.product-item').forEach(item => {
+        //                 item.style.display = 'none';
+        //             });
     
-                    // Show products with matching category
-                    document.querySelectorAll(`.product-item[data-category="${selector}"]`).forEach(item => {
-                        item.style.display = 'block';
-                    });
-                }
+        //             // Show products with matching category
+        //             document.querySelectorAll(`.product-item[data-category="${selector}"]`).forEach(item => {
+        //                 item.style.display = 'block';
+        //             });
+        //         }
             });
         });
         

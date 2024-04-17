@@ -45,8 +45,8 @@
 					<div class="breadcrumb-text">
 						<h1>Shop</h1>
 					</div>
-					<div>
-							<a href="/products/create">add product +</a>
+					<div class="py-4 px-4">
+							<a  class="px-3 py-2 border-2 border-orange-400 rounded-full  text-white hover:bg-orange-400 content-center" href="/products/create">add product.. +</a>
 					</div>
 				</div>
 			</div>
@@ -65,7 +65,7 @@
 			</div>
 			<div class="flex justify-center">
 				<div class="categories">
-					<button class="category-btn">All</button>
+					<button class="category-btn"  data-category="0">All</button>
 					@foreach($categories as $category)
 						<button class="category-btn" data-category="{{ $category->id }}">{{ $category->name }}</button>
 					@endforeach
