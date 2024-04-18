@@ -79,25 +79,25 @@
 					@endforeach
 				</div>
 			</div>
-			<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+			<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4">
 				@foreach($products as $product)
-					<div class="text-center strawberry product-item" data-category="{{ $product->category_id }}">
-						<div class="single-product-item">
-							<div class="product-image">
-								<a href="/products/{{ $product->id }}">
-									@if ($product->images->isNotEmpty())
-										<img class="product-image" src="{{ asset($product->images->first()->path) }}" alt="Product Image">
-									@else
-										<p>No image available</p>
-									@endif
-								</a>
+					<div class="border border-gray-200 rounded-lg overflow-hidden bg-white shadow-md">
+						<a href="/products/{{ $product->id }}">
+							@if ($product->images->isNotEmpty())
+								<img class="w-full h-auto" src="{{ asset($product->images->first()->path) }}" alt="Product Image">
+							@else
+								<p class="text-center">No image available</p>
+							@endif
+							<div class="p-4">
+								<p class="text-lg font-semibold">{{ $product->name }}</p>
+								<p class="text-gray-600">€ {{ $product->price }}</p>
 							</div>
-							<h3>{{ $product->name }}</h3>
-							<p>€ {{ $product->price }}</p>
-						</div>
+						</a>
 					</div>
 				@endforeach
 			</div>
+			
+
 			<div class="text-center mt-6">
 				<div class="pagination-wrap">
 					<ul>

@@ -72,6 +72,8 @@ class productController extends Controller
 
         $parentProductId = $request->input('parent_product');
         if (!empty($parentProductId)) {
+
+
             // If a parent product is selected, treat the current product as a variant
             $parentProduct = Product::findOrFail($parentProductId);
             $product = new Product;
@@ -81,6 +83,11 @@ class productController extends Controller
             $product->category_id = $validatedData['categorie'];
             $product->parent_id = $parentProduct->id;
             $product->save();
+            foreach ($validatedData['quantities'] as $sizeId => $quantity) {
+                // Attach size to the product with the provided quantity
+                $product->sizes()->attach($sizeId, ['quantity_available' => $quantity]);
+            }
+
         
             // Handle image upload for variants
             if ($request->hasFile('DisplayImage')) {
@@ -109,6 +116,9 @@ class productController extends Controller
         }
         
         // If no parent product is selected, treat the current product as a standalone product
+
+
+
         $product = new Product;
         $product->name = $validatedData['productName'];
         $product->description = $validatedData['productDescription'];
@@ -116,6 +126,11 @@ class productController extends Controller
         $product->category_id = $validatedData['categorie'];
         $product->save();
         
+        foreach ($validatedData['quantities'] as $sizeId => $quantity) {
+            // Attach size to the product with the provided quantity
+            $product->sizes()->attach($sizeId, ['quantity_available' => $quantity]);
+        }
+
         // Handle image upload for standalone products
         if ($request->hasFile('DisplayImage')) {
             $displayImage = $request->file('DisplayImage');

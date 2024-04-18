@@ -52,48 +52,32 @@
 }
 
 
-
-
-
 </style> 
 
-	  <!-- breadcrumb-section -->
-      <div class="breadcrumb-section breadcrumb-bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2 text-center">
-                    <div class="breadcrumb-text">
-                        <p>See more Details</p>
-                        <h1>Single Product</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <!-- end breadcrumb section -->
 
     <!-- single product -->
-    <div class="mt-100 mb-100">
-        <div class="container">
-            <!-- breacamp -->
+    <div class="mt-100 mb-100 flex justify-center items-center">
+        <div class="container mx-auto">
+            <!-- breadcrumb -->
             <div class="breadcrumb">
-                <a href="/">Home</a>
-                <span class="separator">›</span>
-                <a href="/products">men</a>
-                <span class="separator">›</span>
-                <a href="/kleding/t-shirts-tops">T-shirts & tops</a>
-                <span class="separator">›</span>
-                <a href="/kleding/t-shirts-tops/oversized">Oversized</a>
+                <a href="/" class="text-gray-500">Home</a>
+                <span class="text-gray-500">&rsaquo;</span>
+                <a href="/products" class="text-gray-500">men</a>
+                <span class="text-gray-500">&rsaquo;</span>
+                <a href="/kleding/t-shirts-tops" class="text-gray-500">T-shirts &amp; tops</a>
+                <span class="text-gray-500">&rsaquo;</span>
+                <a href="/kleding/t-shirts-tops/oversized" class="text-gray-500">Oversized</a>
             </div>
-
-      
-            <!--end breacamp -->
-            <div class="row">
-                    <div class="col-md-5">
-                        <div class="single-product-img-show">
-                            <img src="{{ asset($product->images->first()->path) }}" alt="Product Image" class="main-product-image">
+            <!-- end breadcrumb -->
+    
+            <div class="md:flex">
+                <div class="flex items-center justify-center">
+                    <div class="single-product-img-show">
+                            <img src="{{ asset($product->images->first()->path) }}" alt="Product Image" class="main-product-image" style="height: 500" width="350">
                             <div class="additional-product-images">
-                                <div class="row m-10">
+                                <div class="row">
                                     @foreach($product->images as $index => $image)
                                         <div class="p-2 additional-image" data-index="{{ $index }}">
                                             <img src="{{ asset($image->path) }}" alt="Additional Product Image" class="img-thumbnail" style="width: 70px; height: 100px;">
@@ -106,8 +90,8 @@
 
                 
 
-                <div class="col-md-7">
-                    <div class="single-product-content">
+                    <div class="col-md-7">
+                        <div class="single-product-content">
 
 
                         <div class="row">
@@ -124,13 +108,13 @@
                             <p class="" style="color:#606060; font-size:12px;"><span></span>color</p>
                             @if ($variants->isNotEmpty())
                                 <h3>Variants</h3>
-                                <ul>
+                                <div class="row">
                                     @foreach ($variants as $variant)
-                                        <a href="/products/{{ $variant->id }}">
-                                            <img src="{{ asset($variant->images->first()->path) }}" alt="Product Image" class="main-product-image" style="width: 100px; height: 150px;">
+                                        <a class="px-1" href="/products/{{ $variant->id }}">
+                                            <img src="{{ asset($variant->images->first()->path) }}" alt="Product Image" class="" style="width: 70px; height: 100px;">
                                         </a>
                                     @endforeach
-                                </ul>
+                                </div>
                             @endif
                             <p class="pt-1" style="color:#606060; font-size:12px;"><span></span>code: OTP241019-102</p>
                         </div>
@@ -261,6 +245,17 @@
             $('.main-product-image').attr('src', imagePath);
         });
     });
+
+    $(document).ready(function() {
+    $(window).on('scroll', function() {
+        // Check if the page is scrolled to position 0
+        if ($(window).scrollTop() === 0) {
+            // If so, scroll the page down by 1 pixel
+            $(window).scrollTop(1);
+        }
+    });
+    $(window).scrollTop(1);
+});
 </script>
 
 
