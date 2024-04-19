@@ -81,7 +81,7 @@
 			</div>
 			<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4">
 				@foreach($products as $product)
-					<div class="border border-gray-200 rounded-lg overflow-hidden bg-white shadow-md">
+					<div class="listed_products border border-gray-200 rounded-lg overflow-hidden bg-white shadow-md" data-category="{{ $product->category_id }}">
 						<a href="/products/{{ $product->id }}">
 							@if ($product->images->isNotEmpty())
 								<img class="w-full h-auto" src="{{ asset($product->images->first()->path) }}" alt="Product Image">
@@ -148,7 +148,7 @@
 <script>
 	document.addEventListener('DOMContentLoaded', function () {
 		const categoryBtns = document.querySelectorAll('.category-btn');
-		const productItems = document.querySelectorAll('.product-item');
+		const productItems = document.querySelectorAll('.listed_products');
 
 		categoryBtns.forEach(btn => {
 			btn.addEventListener('click', () => {
