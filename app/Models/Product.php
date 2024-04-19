@@ -38,4 +38,9 @@ class Product extends Model
     {
         return $this->hasMany(Product::class, 'parent_id');
     }
+    public function isVariant()
+    {
+
+        return $this->parent_id !== null;
+    }
 }

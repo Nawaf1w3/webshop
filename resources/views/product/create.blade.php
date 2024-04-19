@@ -89,7 +89,10 @@
                                             <select name="parent_product" class="form-control">
                                                 <option value="">None</option>
                                                 @foreach ($products as $product)
+                                                    @if ($product->parent_id === null)
                                                     <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                                    @endif
+                                                    
                                                 @endforeach
                                             </select>
                                         </div>

@@ -59,9 +59,9 @@
 
     <!-- single product -->
     <div class="mt-100 mb-100 flex justify-center items-center">
-        <div class="container mx-auto">
+        <div class="container mx-auto left-32">
             <!-- breadcrumb -->
-            <div class="breadcrumb">
+            <div class=" pb-4">
                 <a href="/" class="text-gray-500">Home</a>
                 <span class="text-gray-500">&rsaquo;</span>
                 <a href="/products" class="text-gray-500">men</a>
@@ -73,13 +73,13 @@
             <!-- end breadcrumb -->
     
             <div class="md:flex">
-                <div class="flex items-center justify-center">
+                <div class="">
                     <div class="single-product-img-show">
                             <img src="{{ asset($product->images->first()->path) }}" alt="Product Image" class="main-product-image" style="height: 500" width="350">
                             <div class="additional-product-images">
                                 <div class="row">
                                     @foreach($product->images as $index => $image)
-                                        <div class="p-2 additional-image" data-index="{{ $index }}">
+                                        <div class="pl-3 pt-3 additional-image" data-index="{{ $index }}">
                                             <img src="{{ asset($image->path) }}" alt="Additional Product Image" class="img-thumbnail" style="width: 70px; height: 100px;">
                                         </div>
                                     @endforeach
@@ -89,14 +89,10 @@
                     </div>
 
                 
-
-                    <div class="col-md-7">
-                        <div class="single-product-content">
-
-
+                <div class="col-md-7">
+                    <div class="single-product-content">
                         <div class="row">
                             <h3>{{ $product->name }}</h3>
-                               
                             <h3 class="pl-5">€ {{ $product->price }}</h3>   
                         </div>
 
@@ -106,12 +102,11 @@
 
                         <div class="select_color">
                             <p class="" style="color:#606060; font-size:12px;"><span></span>color</p>
-                            @if ($variants->isNotEmpty())
-                                <h3>Variants</h3>
+                            @if ($relatedProducts->isNotEmpty())
                                 <div class="row">
-                                    @foreach ($variants as $variant)
-                                        <a class="px-1" href="/products/{{ $variant->id }}">
-                                            <img src="{{ asset($variant->images->first()->path) }}" alt="Product Image" class="" style="width: 70px; height: 100px;">
+                                    @foreach ($relatedProducts as $relatedProduct)
+                                        <a class="px-1" href="/products/{{ $relatedProduct->id }}">
+                                            <img src="{{ asset($relatedProduct->images->first()->path) }}" alt="Product Image" class="" style="width: 70px; height: 100px;">
                                         </a>
                                     @endforeach
                                 </div>

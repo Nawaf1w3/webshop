@@ -197,15 +197,44 @@ class productController extends Controller
      */
     public function show($id)
     {
-
         $product = Product::findOrFail($id);
-        $variants = $product->variants()->get();
-        $sizes = $product->sizes()->withPivot('quantity_available')->get();
-        // dd($sizes);
-        $currentProductId = $id;
         $products = Product::where('id', '!=', $id)->get();
         
-        return view('product.show', compact('variants','product', 'sizes', 'products', 'currentProductId'));
+
+
+        
+        $sizes = $product->sizes()->withPivot('quantity_available')->get();
+   
+        $currentProductId = $id;
+    
+        $parentProduct = null;
+        $variants = null;
+
+        if ($product->isVariant()) {
+            $parentProduct = $product->parentProduct;
+            $variants = $parentProduct->variants;
+        } else {
+            $parentProduct = $product;
+            $variants = $product->variants;
+        }
+        if ($product->isVariant()) {
+            // If it's a variant, fetch related products based on the parent ID
+            $relatedProducts = Product::where('parent_id', $product->parent_id)
+                ->orWhere('id', $product->parent_id) // Include the parent product itself
+                ->where('id', '!=', $product->id)
+                ->get();
+        } else {
+            // If it's a parent product, fetch related products based on the parent ID
+            $relatedProducts = Product::where('parent_id', $product->id)
+                ->orWhere('id', $parentProduct->id) // Include the parent product itself
+                ->where('id', '!=', $product->id)
+                ->get();
+        }
+        //dd($relatedProducts);
+
+        //dd($parentProduct);
+    return view('product.show', compact('currentProductId','product','sizes','parentProduct', 'variants', 'relatedProducts','products'));
+
     }
 
     /**
